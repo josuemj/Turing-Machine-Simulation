@@ -1,7 +1,7 @@
 # Turing Machine Simulator
 
 ## Overview
-This project is a Python-based simulator for deterministic Turing machines, designed for an educational purpose as part of a midterm assessment. The simulator validates Turing machine configurations, runs simulations on specified input strings, and outputs configuration files based on class-defined formats.
+This project is a Python-based simulator for deterministic Turing machines. The simulator validates Turing machine configurations, runs simulations on specified input strings, and outputs configuration files based on class-defined formats.
 
 ## Features
 - Load Turing machine specifications from a text file.
