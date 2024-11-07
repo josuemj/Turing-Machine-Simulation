@@ -83,11 +83,15 @@ class TuringMachine:
         return ''.join(self.tape).rstrip("B")  # Strip trailing blank symbols
 
     def display(self):
-        print(f'Q ->  {self.Q}')
+        print(f'\nQ ->  {self.Q}')
         print(f'Sigma -> {self.Sigma}')
         print(f'Gamma -> {self.Gamma}')
-        print(self.delta)
-        print(self.Q)
-        print(self.q0)
-        print(self.q_accept)
-        print(self.q_reject)
+        
+        print("\nDelta")
+        for i in self.delta:
+            print(i)
+            
+        print(f'\nInitial state (q0) -> {self.q0}')
+        print(f'\nAccept state -> {self.q_accept}')
+
+        print(f'\nReject state -> {self.q_reject}')
