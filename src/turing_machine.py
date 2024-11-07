@@ -20,3 +20,64 @@ class TuringMachine:
         self.q_accept = q_accept
         self.q_reject = q_reject
         self.reset()
+
+    def reset(self):
+        """Resets the machine to its initial configuration."""
+        self.tape = []
+        self.head_position = 0
+        self.current_state = self.q0
+
+    def load_input(self, w):
+        """
+        Loads the input string onto the tape and resets the head position.
+        
+        Parameters:
+        w (str): The input word to be processed by the Turing machine.
+        """
+        self.tape = list(w) + ["⊔"]  # Add a blank symbol to the end of the tape
+        self.head_position = 0
+        self.current_state = self.q0
+
+    def step(self):
+        """Performs a single step of the Turing machine."""
+        if self.current_state == self.q_accept or self.current_state == self.q_reject:
+            return  # Machine halts if it is in an accepting or rejecting state
+
+        tape_symbol = self.tape[self.head_position]
+        action = self.delta.get((self.current_state, tape_symbol))
+
+        if action is None:
+            self.current_state = self.q_reject  # Transition undefined; move to reject state
+            return
+
+        new_state, new_symbol, direction = action
+        self.tape[self.head_position] = new_symbol  # Write new symbol to tape
+        self.current_state = new_state  # Update the current state
+
+        # Move the head left or right
+        if direction == 'L':
+            self.head_position = max(0, self.head_position - 1)  # Prevents moving left off the tape
+        elif direction == 'R':
+            self.head_position += 1
+            if self.head_position >= len(self.tape):  # Extend tape if necessary
+                self.tape.append("⊔")
+        elif direction == 'S':  # Stay in place (used for infinite loop)
+            pass
+
+    def run(self):
+        """Runs the Turing machine until it halts in either the accept or reject state or loops indefinitely."""
+        step_count = 0  # Limit steps to avoid infinite loops in testing
+        while self.current_state not in {self.q_accept, self.q_reject} and step_count < 1000:
+            self.step()
+            step_count += 1
+
+        # Check if it stopped due to reaching the limit, indicating an infinite loop
+        if step_count >= 1000:
+            print("Infinite loop detected.")
+            return False
+
+        return self.current_state == self.q_accept
+
+    def get_tape_contents(self):
+        """Returns the current contents of the tape as a string."""
+        return ''.join(self.tape).rstrip("⊔")  # Strip trailing blank symbols
