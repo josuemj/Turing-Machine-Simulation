@@ -6,7 +6,7 @@ class TuringMachine:
         Parameters:
         Q (set): Set of states
         Sigma (set): Input alphabet (does not contain the blank symbol)
-        Gamma (set): Tape alphabet (includes the blank symbol)
+        Gamma (set): Tape alphabet (includes the blank symbol) in this case represented as B
         delta (dict): Transition function in the form { (state, tape_symbol): (new_state, new_symbol, direction) }
         q0: Initial state
         q_accept: Accept state
@@ -34,7 +34,7 @@ class TuringMachine:
         Parameters:
         w (str): The input word to be processed by the Turing machine.
         """
-        self.tape = list(w) + ["⊔"]  # Add a blank symbol to the end of the tape
+        self.tape = list(w) + ["B"]  # Add a blank symbol to the end of the tape
         self.head_position = 0
         self.current_state = self.q0
 
@@ -60,7 +60,7 @@ class TuringMachine:
         elif direction == 'R':
             self.head_position += 1
             if self.head_position >= len(self.tape):  # Extend tape if necessary
-                self.tape.append("⊔")
+                self.tape.append("B")
         elif direction == 'S':  # Stay in place (used for infinite loop)
             pass
 
@@ -80,4 +80,14 @@ class TuringMachine:
 
     def get_tape_contents(self):
         """Returns the current contents of the tape as a string."""
-        return ''.join(self.tape).rstrip("⊔")  # Strip trailing blank symbols
+        return ''.join(self.tape).rstrip("B")  # Strip trailing blank symbols
+
+    def display(self):
+        print(f'Q ->  {self.Q}')
+        print(f'Sigma -> {self.Sigma}')
+        print(f'Gamma -> {self.Gamma}')
+        print(self.delta)
+        print(self.Q)
+        print(self.q0)
+        print(self.q_accept)
+        print(self.q_reject)
