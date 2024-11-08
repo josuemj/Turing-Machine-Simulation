@@ -7,7 +7,7 @@ tm = get_turing('config/turing_machine.json')  # Provide the path to your JSON f
 tm.display()
 
 # Test cases
-test_inputs = ["111", "", "10"]  # Expected: Accept, Loop, Reject
+test_inputs = ["111", "","10"]  # Expected: Accept, Loop, Reject
 for w in test_inputs:
     print(f"Input: {w}")
     tm.load_input(w)
@@ -19,4 +19,7 @@ for w in test_inputs:
     else:
         print("Result: Infinite loop detected")
     print("Tape Contents:", tm.get_tape_contents())
-    print()
+    tm.save_configurations("output/w_"+w+"configurations.txt")  # Save configurations to a text file
+
+    
+    

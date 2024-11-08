@@ -19,6 +19,8 @@ class TuringMachine:
         self.q0 = q0
         self.q_accept = q_accept
         self.q_reject = q_reject
+        
+        self.configurations = [] #save configurations
         self.reset()
 
     def reset(self):
@@ -26,6 +28,7 @@ class TuringMachine:
         self.tape = []
         self.head_position = 0
         self.current_state = self.q0
+        self.configuratios = []
 
     def load_input(self, w):
         """
@@ -37,9 +40,19 @@ class TuringMachine:
         self.tape = list(w) + ["B"]  # Add a blank symbol to the end of the tape
         self.head_position = 0
         self.current_state = self.q0
+    
+    def print_configuration(self):
+        """Prints the current configuration of the Turing machine."""
+        # u is the part of the tape to the left of the head, v starts from the head position
+        u = ''.join(self.tape[:self.head_position])
+        v = ''.join(self.tape[self.head_position:])
+        print(f"Configuration: {u} {self.current_state} {v}")
+        self.configurations.append(u+self.current_state+v)
 
     def step(self):
         """Performs a single step of the Turing machine."""
+        self.print_configuration()  # Print configuration at each step
+        
         if self.current_state == self.q_accept or self.current_state == self.q_reject:
             return  # Machine halts if it is in an accepting or rejecting state
 
@@ -95,3 +108,10 @@ class TuringMachine:
         print(f'\nAccept state -> {self.q_accept}')
 
         print(f'\nReject state -> {self.q_reject}')
+    
+    def save_configurations(self, filename):
+        """Saves the recorded configurations to a text file."""
+        with open(filename, 'w') as file:
+            for configuration in self.configurations:
+                file.write(configuration + '\n')
+        print(f"Configurations saved to {filename}")
