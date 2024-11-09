@@ -25,6 +25,6 @@ def render_turing_machine_graph(tm):
         label = f"{symbol} → {write_symbol}, {direction}"
         dot.edge(current_state, next_state, label=label)
 
-    dot.render('turing_machine_graph', view=True)
+    dot.render('/output/turing_machine_graph', view=True)
     print("Graph saved as 'turing_machine_graph.png' and opened for viewing.")
 

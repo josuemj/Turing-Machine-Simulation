@@ -21,14 +21,24 @@ def get_turing(filename: str):
 
 def get_turing_json(data):
     """
-    receives a json from streamlit, tm configuration
+    Receives a JSON data from Streamlit with Turing machine configuration
+    and initializes a TuringMachine instance.
     """
     Q = data['Q']
     Sigma = data['Sigma']
     Gamma = data['Gamma']
-    delta = {tuple(k): tuple(v) for k, v in data['delta'].items()}
+    
+    # Parse delta correctly for the nested structure
+    delta = {}
+    for state, transitions in data['delta'].items():
+        for symbol, action in transitions.items():
+            # Each action is a list [next_state, write_symbol, direction]
+            next_state, write_symbol, direction = action
+            delta[(state, symbol)] = (next_state, write_symbol, direction)
+
     q0 = data['q0']
     q_accept = data['q_accept']
     q_reject = data['q_reject']
-    return TuringMachine(Q, Sigma, Gamma, delta, q0, q_accept, q_reject)
     
+    # Return an instance of TuringMachine
+    return TuringMachine(Q, Sigma, Gamma, delta, q0, q_accept, q_reject)
