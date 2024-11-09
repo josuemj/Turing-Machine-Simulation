@@ -1,0 +1,19 @@
+// Turing Machine
+digraph {
+	q_reject [label=q_reject shape=doublecircle]
+	q_loop [label=q_loop shape=circle]
+	q1 [label=q1 shape=circle]
+	q0 [label=q0 shape=circle]
+	q_accept [label=q_accept shape=doublecircle]
+	q0 -> q1 [label="1 → 1, R"]
+	q0 -> q_loop [label="B → B, S"]
+	q0 -> q_reject [label="0 → 0, S"]
+	q1 -> q1 [label="1 → 1, R"]
+	q1 -> q_accept [label="B → B, S"]
+	q1 -> q_reject [label="0 → 0, S"]
+	q_loop -> q_loop [label="B → B, S"]
+	q_reject -> q_reject [label="0 → 0, S"]
+	q_reject -> q_reject [label="1 → 1, S"]
+	q_reject -> q_reject [label="B → B, S"]
+	q_accept -> q_accept [label="B → B, S"]
+}

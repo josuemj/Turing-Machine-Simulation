@@ -115,3 +115,4 @@ class TuringMachine:
             for configuration in self.configurations:
                 file.write(configuration + '\n')
         print(f"Configurations saved to {filename}")
+        self.configurations = []

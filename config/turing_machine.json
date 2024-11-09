@@ -1,19 +1,28 @@
 {
   "Q": ["q0", "q1", "q_loop", "q_accept", "q_reject"],
   "Sigma": ["1"],
-  "Gamma": ["1", "B"],
+  "Gamma": ["1", "0", "B"],
   "delta": {
     "q0": {
-      "1": ["q1", "1", "R"],
-      "B": ["q_loop", "B", "S"],
-      "0": ["q_reject", "0", "S"]
+      "1": ["q1", "1", "R"],          
+      "B": ["q_loop", "B", "S"],      
+      "0": ["q_reject", "0", "S"]   
     },
     "q1": {
-      "1": ["q1", "1", "R"],
-      "B": ["q_accept", "B", "S"]
+      "1": ["q1", "1", "R"],          
+      "B": ["q_accept", "B", "S"],    
+      "0": ["q_reject", "0", "S"]   
     },
     "q_loop": {
-      "B": ["q_loop", "B", "S"]
+      "B": ["q_loop", "B", "S"]      
+    },
+    "q_reject": {
+      "0": ["q_reject", "0", "S"],    
+      "1": ["q_reject", "1", "S"],   
+      "B": ["q_reject", "B", "S"]    
+    },
+    "q_accept": {
+      "B": ["q_accept", "B", "S"]     
     }
   },
   "q0": "q0",

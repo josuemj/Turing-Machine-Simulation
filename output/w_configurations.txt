@@ -1,7 +1,3 @@
-q0111B
-1q111B
-11q11B
-111q1B
 q0B
 q_loopB
 q_loopB

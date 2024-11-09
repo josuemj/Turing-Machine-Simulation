@@ -18,3 +18,17 @@ def get_turing(filename: str):
 
     # Now you can initialize your TuringMachine
     return TuringMachine(Q, Sigma, Gamma, delta, q0, q_accept, q_reject)
+
+def get_turing_json(data):
+    """
+    receives a json from streamlit, tm configuration
+    """
+    Q = data['Q']
+    Sigma = data['Sigma']
+    Gamma = data['Gamma']
+    delta = {tuple(k): tuple(v) for k, v in data['delta'].items()}
+    q0 = data['q0']
+    q_accept = data['q_accept']
+    q_reject = data['q_reject']
+    return TuringMachine(Q, Sigma, Gamma, delta, q0, q_accept, q_reject)
+    
