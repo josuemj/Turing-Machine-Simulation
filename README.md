@@ -92,4 +92,4 @@ streamlit run main.py
 
 # Demo
 
-[!output](output/turing.gif)
+![output](output/turing.gif)
