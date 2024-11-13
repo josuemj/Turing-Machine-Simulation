@@ -37,7 +37,7 @@ cd Turing-Machine-Simulation
 2. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requeriments.txt
 ```
 
 3. Run the Streamlit application:
